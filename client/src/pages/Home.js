@@ -10,13 +10,23 @@ const Home = () => {
     const [data, setData] = useState([]);
 
     const loadData = async() =>{
-        const response = await axios.get("http://localhost:3000");
+        const response = await axios.get("http://localhost:5000/api/get");
         setData(response.data);
     };
 
     useEffect(()=>{
         loadData();
     },[]);
+
+    const deletePlayer = (id) => {
+        if(
+            window.confirm("are you sure to delete player?")
+        ){
+            axios.delete('http://localhost:5000/api/Remove/${id}');
+            toast.success("Player delete successfull");
+            setTimeout(() => loadData(),500);
+        }
+    };
 
     return ( 
         <div style={{marginTop:"150px"}}>
@@ -27,11 +37,12 @@ const Home = () => {
                 <thead>
                     <tr>
                         <th style={{textAlign : "center"}}>No.</th>
-                        <th style={{textAlign : "center"}}>Nom</th>
+                        <th style={{textAlign : "center"}}>name</th>
                         <th style={{textAlign : "center"}}>club_player</th>
                         <th style={{textAlign : "center"}}>wins</th>
                         <th style={{textAlign : "center"}}>losses</th>
                         <th style={{textAlign : "center"}}>points_scored</th>
+                        <th style={{textAlign : "center"}}>Action</th>
                         
                     </tr>
                 </thead>
@@ -49,7 +60,7 @@ const Home = () => {
                                     <Link to={`/update/${item.id}`}>
                                         <button className="btn btn-edit">Edit</button>
                                     </Link>
-                                    <button className="btn btn-delete"  >Delete</button>
+                                    <button className="btn btn-delete"  onClick={() => deletePlayer(item.id)} >Delete</button>
                                     <Link to={`/view/${item.id}`}>
                                         <button className="btn btn-view">View</button>
                                     </Link>
@@ -57,7 +68,7 @@ const Home = () => {
                                 </td>
 
                             </tr>
-                        )
+                        );
                     })} 
                 </tbody> 
             </table>

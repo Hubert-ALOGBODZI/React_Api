@@ -28,10 +28,59 @@ app.get('/api/get', (req, res) => {
 
     const sqlGet = "SELECT * FROM foot";
     db.query(sqlGet,(err,result) =>{
-    
-
      res.send(result)
      });
+     
+    });
+
+
+     app.post('/api/post', (req, res) => {
+
+        const {name,club_player,wins,losses,points_scored} = req.body;
+        const sqlInsert = "INSERTR INTO foot (name,club_player,wins,losses,points_scored VALUES(?,?,?,?)";
+        db.query(sqlInsert,[name,club_player,wins,losses,points_scored],(err,result) =>{
+        if (err) {
+            console.log(err)
+        }
+         });
+        });
+
+        app.post('/api/remove/:id', (req, res) => {
+
+            const { id } = req.params;
+            const sqlRemove = "DELETE FROM foot WHERE id = ?";
+            db.query(sqlRemove,id,(err,result) =>{
+            if (err) {
+                console.log(err)
+            }
+             });
+            });
+            
+
+        app.post('/api/get/:id', (req, res) => {
+
+            const { id } = req.params;
+            const sqlGet = "SELECT * FROM foot WHERE id = ?";
+            db.query(sqlGet,id,(err,result) =>{
+            if (err) {
+                console.log(err)
+            }
+            res.send(result)
+             });
+            });
+
+            app.put('/api/Update/:id', (req, res) => {
+
+                const { id } = req.params;
+                const {name,club_player,wins,losses,points_scored} = req.body;
+                const sqlUpdate= "Update foot SET name = ?,club_player=?, wins=?,losses=?, points_scored=? WHERE id = ? ";
+                db.query(sqlUpdate,[name,club_player,wins,losses,points_scored,id],(err,result) =>{
+                if (err) {
+                    console.log(err)
+                }
+                res.send(result)
+                 });
+                });
         
     //     const sqlInsert = "INSERT INTO foot (name,club_player,wins,losses,points_scored) VALUES('Dakonam Djene','Getafe, Espagne',102,3,7)";
     //    db.query(sqlInsert,(err,result) =>{
@@ -44,7 +93,7 @@ app.get('/api/get', (req, res) => {
   
 
 
-});
+
 
 
 
