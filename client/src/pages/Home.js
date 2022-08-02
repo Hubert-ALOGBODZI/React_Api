@@ -22,7 +22,7 @@ const Home = () => {
         if(
             window.confirm("are you sure to delete player?")
         ){
-            axios.delete('http://localhost:5000/api/Remove/${id}');
+            axios.delete(`http://localhost:5000/api/remove/${id}`);
             toast.success("Player delete successfull");
             setTimeout(() => loadData(),500);
         }
@@ -39,9 +39,9 @@ const Home = () => {
                         <th style={{textAlign : "center"}}>No.</th>
                         <th style={{textAlign : "center"}}>name</th>
                         <th style={{textAlign : "center"}}>club_player</th>
-                        <th style={{textAlign : "center"}}>wins</th>
+                        {/* <th style={{textAlign : "center"}}>wins</th>
                         <th style={{textAlign : "center"}}>losses</th>
-                        <th style={{textAlign : "center"}}>points_scored</th>
+                        <th style={{textAlign : "center"}}>points_scored</th> */}
                         <th style={{textAlign : "center"}}>Action</th>
                         
                     </tr>
@@ -53,15 +53,15 @@ const Home = () => {
                                 <th scope="row" >{index+1}</th>
                                 <td>{item.name}</td>
                                 <td>{item.club_player}</td>
-                                <td>{item.wins}</td>
+                                {/* <td>{item.wins}</td>
                                 <td>{item.losses}</td>
-                                <td>{item.points_scored}</td>
+                                <td>{item.points_scored}</td> */}
                                 <td>
                                     <Link to={`/update/${item.id}`}>
                                         <button className="btn btn-edit">Edit</button>
                                     </Link>
                                     <button className="btn btn-delete"  onClick={() => deletePlayer(item.id)} >Delete</button>
-                                    <Link to={`/view/${item.id}`}>
+                                    <Link to={`/View/${item.id}`}>
                                         <button className="btn btn-view">View</button>
                                     </Link>
 

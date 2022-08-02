@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import axios from "axios";
+
 const initialState = {
     name:"",
     club_player:"",
@@ -17,17 +19,20 @@ const Add = () => {
 
     const history = useNavigate();
 
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(()=>{
-        axios.get("http://localhost:5000/api/get/${id}").then((resp) => setState({ ...resp.data[0] }));
-    },[id]);
+        axios
+        .get(`http://localhost:5000/api/get/${id}`)
+        .then((resp) => setState({...resp.data[0] }));
+    },[id]) ;
 
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         if(!name || !club_player || !wins || !losses || !points_scored){
             toast.error("Please provide value into each  input field");
         }else {
@@ -38,24 +43,26 @@ const Add = () => {
                     club_player,
                     wins,
                     losses,
-                    points_scored, 
-                }).then(()=>{
-                    setState({name:"", club_player:"",wins:"",losses:"",points_scored:"", })
+                    points_scored,
                 })
-                .catch((err) => toast.err(err.response.data));
+                .then(()=>{
+                    setState({name:"", club_player:"",wins:"",losses:"",points_scored:"", });
+                })
+                .catch((err) => toast.error(err.response.data));
                 toast.success("Contact added successfully ");
             }else {
                 axios
-                .put('http://localhost:5000/api/Update/${id}', {
+                .put(`http://localhost:5000/api/update/${id}`, {
                     name,
                     club_player,
                     wins,
                     losses,
                     points_scored,
-                }).then(()=>{
-                    setState({name:"", club_player:"",wins:"",losses:"",points_scored:"", })
                 })
-                .catch((err) => toast.err(err.response.data));
+                .then(()=>{
+                    setState({name:"", club_player:"", wins:"", losses:"", points_scored:"" });
+                })
+                .catch((err) => toast.error(err.response.data));
                 toast.success("Contact update successfully ");
             }
 
@@ -78,12 +85,13 @@ const Add = () => {
             onSubmit={handleSubmit}
             >
                 <label htmlFor="name">Name</label>
-                <input type="text"
+                <input
+                type="text"
                 id='name' 
                 name='name'
                 placeholder='Player name'
                 value={name || ""}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange}/><br /><br />
 
 
                 <label htmlFor="club_player">club_player</label>
@@ -92,7 +100,7 @@ const Add = () => {
                 name='club_player'
                 placeholder='Player club_player'
                 value={club_player || ""}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange}/><br /><br />
 
 
                 <label htmlFor="wins">wins</label>
@@ -101,7 +109,7 @@ const Add = () => {
                 name='wins'
                 placeholder='Player wins'
                 value={wins || ""}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange}/><br /><br />
 
 
                 <label htmlFor="losses">losses</label>
@@ -110,7 +118,7 @@ const Add = () => {
                 name='losses'
                 placeholder='Player losses'
                 value={losses || ""}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange}/><br /><br />
 
 
                 <label htmlFor="points_scored">points_scored</label>
@@ -119,11 +127,14 @@ const Add = () => {
                 name='points_scored'
                 placeholder='Player points_scored'
                 value={points_scored || ""}
-                onChange={handleInputChange}/>
-                <input type="submit" value={ id ? "Update" : "save"} />
-                <link to="/">
-                <input type="button" value="Go back" />
-                </link>
+                onChange={handleInputChange}/><br /><br />
+
+
+                <input type="submit" value={id ? "Update" : "save"} /><br /><br />
+
+                <Link to="/">
+                       <div className="btn btn-edit">Go back</div>
+                </Link>
             </form>
         </div>
      );

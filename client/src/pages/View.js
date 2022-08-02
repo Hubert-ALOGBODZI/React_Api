@@ -3,15 +3,17 @@ import {useParams, Link} from 'react-router-dom';
 import axios from "axios";
 import "./View.css";
 
+
 const View = () => {
     const [user , setUser] = useState({});
 
     const {id} = useParams();
 
     useEffect(() => {
-        axios.get('http://localohost:5000/api/get/${id}')
+        axios
+        .get(`http://localohost:5000/api/get/${id}`)
         .then((resp) => setUser({...resp.data[0] }));
-    })
+    },[id]);
     return ( 
         <div style={{ marginTop:"150px"}}>
             <div className="card">
