@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import axios from "axios";
+import "./Add.css";
 
 const initialState = {
     name:"",
@@ -133,7 +134,9 @@ const Add = () => {
                 <input type="submit" value={id ? "Update" : "save"} /><br /><br />
 
                 <Link to="/">
-                       <div className="btn btn-edit">Go back</div>
+                       
+                        <input type="submit" value={"Go back"} />
+                      
                 </Link>
             </form>
         </div>
