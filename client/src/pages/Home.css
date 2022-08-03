@@ -1,4 +1,7 @@
-.styled-table {
+.container {
+    background-color: rgb(80, 210, 217);
+}
+.container .styled-table {
     border-collapse: collapse;
     margin: auto;
     font-size: 0.9em;
@@ -7,29 +10,29 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
-.styled-table thead tr {
+.container .styled-table thead tr {
     background-color: #009879;
     color: #ffffff;
     text-align: left;
 }
 
-.styled-table th,
-.styled-table  td{
+.container .styled-table th,
+.container .styled-table  td{
     padding: 12px 15px;
 }
 
-.styled-table tbody tr {
+.container .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-.styled-table tbody tr:nth-of-type(even){
+.container .styled-table tbody tr:nth-of-type(even){
     background-color: #f3f3f3;
 }
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+.container .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid yellow;
 }
 
-.btn {
+.container .btn {
     border: none;
     color: white;
     padding: 5px 8px;
@@ -42,21 +45,22 @@
     cursor: pointer;
 }
 
-.btn-edit {
-    background-color: #008cba;
+.container .btn-edit {
+    background-color: #0ac886;
 }
 
-.btn-delete{
+.container .btn-delete{
     background-color: #f44336;
 }
 
-.btn-view {
+.container .btn-view {
     background-color: white;
     color: black;
 }
 
-.btn-contact {
-    background-color: #11a3cf;
+.container .btn-contact {
+    background-color: yellow;
+    color: black;
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 10px;

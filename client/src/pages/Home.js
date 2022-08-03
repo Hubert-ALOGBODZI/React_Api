@@ -29,9 +29,9 @@ const Home = () => {
     };
 
     return ( 
-        <div style={{marginTop:"150px"}}>
+        <div style={{marginTop:"150px"}} className="container">
             <Link to="/Add">
-            <button className="btn btn-contact">Add</button>
+            <button className="btn btn-contact">Add THE NEW PLAYER</button>
             </Link>
                     <table className="styled-table">
                 <thead>

@@ -1,8 +1,7 @@
-const express = require("express");
+const express = require ("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
 const mysql = require("mysql2");
 
 const db = mysql.createPool({
@@ -15,7 +14,7 @@ const db = mysql.createPool({
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use( bodyParser.urlencoded({extended: true}));
 
 
 
@@ -24,18 +23,16 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //GET METHODE
 
-app.get('/api/get', (req, res) => {
-
-    const sqlGet = "SELECT * FROM foot";
-    db.query(sqlGet,(error,result) =>{
-     res.send(result)
-     });
-     
+app.get("/api/get" , (req ,res ) => {
+    const sqlGet = "SELECT * FROM foot ";
+    db.query(sqlGet, (error , result) => {
+        res.send(result);
     });
+});
 
     //INSERTION
 
-     app.post(`/api/post`, (req, res) => {
+    app.post("/api/post" ,(req, res) => {
 
         const {name,club_player,wins,losses,points_scored} = req.body;
         const sqlInsert = "INSERT INTO foot (name,club_player,wins,losses,points_scored) VALUES(?,?,?,?,?)";
@@ -44,7 +41,7 @@ app.get('/api/get', (req, res) => {
             console.log(error)
         }
          });
-        });
+        })
 
         //DELETE
         app.delete(`/api/remove/:id`, (req, res) => {
@@ -60,20 +57,19 @@ app.get('/api/get', (req, res) => {
             });
             
 
-        app.post(`/api/get/:id`, (req, res) => {
-
-            const { id } = req.params;
-            const sqlGet = "SELECT * FROM foot Where id = ?";
-            db.query(sqlGet, id, (err,result) =>{
-            if (err) {
-                console.log(err)
-            }
-            res.send(result)
-             });
+            app.get("/api/get/:id" , (req ,res ) => {
+                const {id} = req.params;
+                const sqlGet = "SELECT * FROM foot where id = ?";
+                db.query(sqlGet,id, (error , result) => {
+                    if( error){
+                        console.log(error)
+                    }
+                    res.send(result);
+                });
             });
 
             //update
-            app.put(`/api/update/:id`, (req, res) => {
+            app.put("/api/update/:id" , (req ,res ) => {
 
                 const { id } = req.params;
 
