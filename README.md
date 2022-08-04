@@ -15,4 +15,9 @@ Dans ce projet, j'ai effectuer un CRUD:
  _ Mise à jour d'un joeur existant,
  
  _ Suppression d'un joueur existant.
- 
+ ```
+
+
+## Structuration
+
+J'ai subdivisé le travil en en Deux grand groupe : ### server et ### 
